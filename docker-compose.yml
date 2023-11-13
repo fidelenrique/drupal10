@@ -1,0 +1,68 @@
+version: '3.7'
+services:
+  php:
+    container_name: d10-php
+    build: docker/php
+    volumes:
+      - './web:/var/www'
+      - './docker/php/config/vhost.conf:/etc/apache2/sites-enabled/000-default.conf:ro'
+      - './logdirs:/var/log/apache2/'
+    environment:
+      - drupal_data_name=${DATABASE_NAME}
+      - drupal_data_user=${DATABASE_USER}
+      - drupal_data_password=${DATABASE_PASS}
+      - drupal_data_host=${DATABASE_HOST}
+      - drupal_data_port=${DATABASE_PORT}
+      - env=${ENV}
+      - CONTAINER_ENV=1
+      - COMPOSER_MEMORY_LIMIT=-1
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - d10
+
+
+  postgres:
+    container_name: d10-postgres
+    image: postgres:16.0-alpine
+    restart: always
+    ports:
+      - '5435:5432'
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+    volumes:
+      - 'postgres16_db:/var/lib/postgresql/data'
+      - './docker/bdd-postgres:/home/db'
+    networks:
+      - d10
+
+  pgadmin:
+    container_name: d10-pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${DATABASE_PASS}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - 'pgadmin:/var/lib/pgadmin'
+    ports:
+      - '9080:80'
+    restart: always
+    networks:
+      - d10
+
+#Networks
+networks:
+  d10:
+    driver: bridge
+#Networks
+
+
+##Volumes
+volumes:
+  postgres16_db:
+  es_data:
+  pgadmin:
