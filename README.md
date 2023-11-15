@@ -10,8 +10,8 @@ docker-compose up --build -d
 ```
 ## Importer la base de données
 Pour importer la base de données, un Dump de base de données est présent dans le répertoire du projet \
-docker/bdd-postgres. Ce répertoire est un volume partagé avec le container tesensors-postgres. \
-Pour importer la base de données via le container,  il faut d'abord se connecter au container tesensors-postgres. \
+docker/bdd-postgres. Ce répertoire est un volume partagé avec le container d10-postgres. \
+Pour importer la base de données via le container,  il faut d'abord se connecter au container d10-postgres. \
 
 1- Lancer la commande :
 ```
