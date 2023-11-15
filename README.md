@@ -1,6 +1,17 @@
 # drupal10
 ## Installation de docker
-Il faut au préalable avoir docker et docker-compose (ou docker compose) installés sur la machine \
+- Il faut au préalable avoir docker et docker-compose (ou docker compose) installés sur la machine \
+
+- Il faut créer le fichier .env à la racine du projet et copier les variables ci-dessous :
+  DATABASE_NAME=drupal10db
+  DATABASE_USER=root
+  DATABASE_PASS=Drup@l10!
+  DATABASE_HOST=postgres
+  DATABASE_PORT=5432
+  ENV=local
+  URL_FRONT_ACCESS=www.drupal10.fr;www.bo-drupal10.fr
+  URL_BACK_ACCESS=localhost;127.0.0.1
+
 
 ## Lancement des services docker
 Lancement des services avec docker-compose
