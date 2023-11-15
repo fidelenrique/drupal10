@@ -116,7 +116,7 @@ $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
  * be gained by generating a query string from rebuild_token_calculator.sh and
  * using these parameters in a request to rebuild.php.
  */
-$settings['rebuild_access'] = TRUE;
+$settings['rebuild_access'] = FALSE;
 
 /**
  * Skip file system permissions hardening.
@@ -153,3 +153,4 @@ $settings['skip_permissions_hardening'] = TRUE;
  * the language or field module.
  */
 # $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy'];
+$settings['trusted_host_patterns']=["^localhost","^.+\.localhost","^drupal10.fr","^.+\.drupal10.fr"];
